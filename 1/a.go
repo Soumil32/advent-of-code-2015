@@ -28,7 +28,7 @@ func main() {
 func partOne() {
 	// To what floor do the instructions take santa?
 	input_bytes, err:= os.ReadFile("input.txt")
-	check(err)
+	check(err) //easy
 	brackets := strings.Split(string(input_bytes), "")
 
 	var currentFloor int;
