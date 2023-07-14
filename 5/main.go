@@ -43,7 +43,7 @@ func partTwo(input string) {
 	fmt.Println(number)
 }
 
-func readFile(path string) string {
+func ReadFile(path string) string {
 	fileBytes, err := os.ReadFile(path)
 	if err != nil {
 		panic(err)
