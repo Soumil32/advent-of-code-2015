@@ -4,31 +4,33 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
 	input := strings.Split(readFile("input.txt"), "\n")
 	fmt.Printf("The orinal amount of strings is %d\n", len(input))
+	start := time.Now()
 	partOne(input)
+	fmt.Printf("Time taken for part one: %s\n", time.Since(start))
 	partTwo(input)
 }
 
 func partOne(input []string) {
-	niceStrings := []string{};
+	var niceStrings uint = 0;
 	forbidden := []string{"ab", "cd", "pq", "xy"}
 	for _, str := range input {
 		if containsVowels(str, 3) && hasLetterTwiceInARow(str) && !containsForbidden(str, forbidden){
-			niceStrings = append(niceStrings, str)
+			niceStrings++
 		}
 	}
-	fmt.Printf("Part 1: The amount of nice strings are %d\n", len(niceStrings))
+	fmt.Printf("Part 1: The amount of nice strings are %d\n", niceStrings)
 }
 
 func partTwo(input []string) {
 	niceStrings := 0
 	for i := 0; i < len(input); i++ {
 		if containsAPhraseTwice(input[i]) && hasRepeatsWithLetterInBetween(input[i]) {
-			fmt.Println(input[i])
 			niceStrings++
 		}
 	}
