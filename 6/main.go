@@ -62,12 +62,14 @@ func partOne(input []string) {
 			}
 		}
 		}
-		lightsOn := filterLightsMap(lights, 
-			func (value any) bool {
-				return value == ON
-			},
-		)
-		fmt.Printf("Part 1: The amount of lights on is %d\n", len(lightsOn))
+		lightsOn := 0
+		for _, v := range lights {
+			if v == ON {
+				lightsOn++
+			}
+		}
+
+		fmt.Printf("Part 1: The amount of lights on is %d\n", lightsOn)
 	}
 
 func partTwo(input []string) {
