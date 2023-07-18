@@ -28,11 +28,7 @@ func main() {
 func partOne(input []string) {
 	// store the lights state
 	lights := make(map[coordinate]int, 1_000_000)
-	for x := 0; x < 1_000; x++ {
-		for y := 0; y < 1_000; y++ {
-			lights[coordinate{x, y}] = OFF
-		}
-	}
+	
 	// parse input
 	for i := 0; i < len(input); i++ {
 		command := strings.Split(input[i], " ");
