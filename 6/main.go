@@ -22,7 +22,9 @@ func main() {
 	start := time.Now()
 	partOne(input)
 	fmt.Printf("Part 1 took %s\n", time.Since(start))
+	start = time.Now()
 	partTwo(input)
+	fmt.Printf("Part 2 took %s\n", time.Since(start))
 }
 
 func partOne(input []string) {
@@ -32,26 +34,15 @@ func partOne(input []string) {
 	// parse input
 	for i := 0; i < len(input); i++ {
 		command := strings.Split(input[i], " ");
-		var start coordinate
-		var end coordinate
-		if len(command) == 4 {
-			start = convertStringToCoordinates(command[1])
-			end = convertStringToCoordinates(command[3])
-		} else if len(command) == 5 {
-			start = convertStringToCoordinates(command[2])
-			end = convertStringToCoordinates(command[4])
-		}
+		start := convertStringToCoordinates(command[len(command)-3])
+		end := convertStringToCoordinates(command[len(command)-1])
+		cmdLen := len(command)
 		
 		for x := start.x; x <= end.x; x++ { // start and end are inclusive
 			for y := start.y; y <= end.y; y++ {
 				currentCoordinate := coordinate{x, y}
-				if len(command) == 4 {
-					light := lights[currentCoordinate]
-					if light == OFF {
-						lights[currentCoordinate] = ON
-					} else {
-						lights[currentCoordinate] = OFF
-					}
+				if cmdLen == 4 {
+					lights[currentCoordinate] ^= ON
 					continue
 				}
 				if command[1] == "on" {
