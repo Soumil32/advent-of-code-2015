@@ -24,6 +24,39 @@ func main() {
 	partOne(input)
 }
 
+func partTwo(giveToB uint16, input []string) {
+	wires := make(wires, len(input))
+	wires["b"] = giveToB
+	wiresToBeFound := input
+	for {
+		wiresToBeFoundNext := []string{}
+		for i := 0; i < len(wiresToBeFound); i++ {
+			command := strings.Split(wiresToBeFound[i], " ")
+			if command[len(command)-1] == "b" {
+				continue
+			}
+			var succesful bool;
+			switch len(command) {
+			case 3:
+				succesful = threeLenCommand(command, &wires)
+			case 4:
+				succesful = singleInputCommand(command, &wires)
+			case 5:
+				succesful = twoInputCommand(command, &wires)
+			}
+			if !succesful {
+				wiresToBeFoundNext = append(wiresToBeFoundNext, wiresToBeFound[i])
+			}
+		}
+		_, ok := wires["a"]
+		if len(wiresToBeFoundNext) == 0 || ok {
+			break
+		}
+		wiresToBeFound = wiresToBeFoundNext
+	}
+	fmt.Printf("Part 2: The wire 'a' now has the signal %d\n", wires["a"])
+}
+
 func partOne(input []string) {
 	wires := make(wires, len(input))
 	wiresToBeFound := input
@@ -51,6 +84,7 @@ func partOne(input []string) {
 		wiresToBeFound = wiresToBeFoundNext
 	}
 	fmt.Printf("Part 1: The wire 'a' had the signal %d\n", wires["a"])
+	partTwo(wires["a"], input)
 }
 
 func threeLenCommand(command []string, pWires *wires) bool {
