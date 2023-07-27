@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	input := readFile("input.txt")
+	input := ReadFile("input.txt")
 	partOne(input);
 	partTwo(input)
 }
